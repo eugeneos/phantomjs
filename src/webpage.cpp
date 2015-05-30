@@ -1436,6 +1436,11 @@ void WebPage::sendEvent(const QString &type, const QVariant &arg1, const QVarian
 
         // Prepare the Mouse event
         qDebug() << "Mouse Event:" << eventType << "(" << mouseEventType << ")" << m_mousePos << ")" << button << buttons;
+
+        m_scrollPosition = QPoint(0, 0);
+        m_customWebPage->mainFrame()->setScrollPosition(m_scrollPosition);
+        m_scrollPosition = m_customWebPage->mainFrame()->scrollPosition();
+
         QMouseEvent *event = new QMouseEvent(mouseEventType, m_mousePos, button, buttons, keyboardModifiers);
 
         // Post and process events
